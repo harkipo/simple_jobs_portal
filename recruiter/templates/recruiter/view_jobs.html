@@ -1,0 +1,40 @@
+{% extends 'recruiter/base.html' %} 
+{% block content %}
+
+    <h1 class="card-title mt-3 text-center">Posted Jobs</h1>
+<br>
+<div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Position</th>
+                <th>Company Name</th>
+                <th>CTC offered</th>
+                <th>Action</th>
+              </tr>
+        </thead>
+        <tbody>
+    {% for job in jobs %}
+    
+            <tr>
+                <td>{{job.position}}</td>
+                <td>{{job.company_name}}</td>
+                <td>{{job.ctc}}</td>
+                <td><a href="{% url 'view_applicants' job.id %}">View Applicants</a></td>
+              </tr>
+    {% endfor %}
+    
+        </tbody>
+        
+      </table>
+      
+
+</div>
+
+
+
+
+
+{% endblock %}
+
+

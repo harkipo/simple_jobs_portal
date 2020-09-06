@@ -1,0 +1,61 @@
+{% extends 'recruiter/base.html' %} 
+{% block content %}
+
+    <h1 class="card-title mt-3 text-center">Applicants</h1>
+<br>
+
+<div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Current CTC</th>
+                <th>CTC</th>
+                <th>Current application status</th>
+                <th>Applied at</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for applicant in applicants %}
+            <tr class="odd gradeX">
+                <td class="center">{{applicant.candidate.user.first_name}}</td>
+                <td>{{ applicant.candidate.current_ctc }}</td>
+                <td>{{ applicant.candidate.expected_ctc }}</td>
+                <td>{{ applicant.status }}</td>
+                <td>{{ applicant.applied_at }}</td>
+                <td class="text-center">
+
+                {% if applicant.status == 'pending' %}
+                <a type="button" href="{% url 'approve_candidate' applicant.job_id applicant.candidate_id %}" class="btn btn-outline btn-success">Approve</a>
+                 <a type="button" href="{% url 'reject_candidate' applicant.job_id applicant.candidate_id %}" class="btn btn-outline btn-danger">Reject</a>
+                {% elif applicant.status == 'approved' %}
+                <a type="button" href="{% url 'reject_candidate' applicant.job_id applicant.candidate_id %}" class="btn btn-outline btn-danger">Reject</a>
+                {% else %}
+                <a type="button" href="{% url 'approve_candidate' applicant.job_id applicant.candidate_id %}" class="btn btn-outline btn-success">Approve</a>
+                {% endif %}
+
+
+                </td>
+                
+
+            </tr>
+       
+            {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+      
+
+<div class="text-center">
+    <a href="{% url 'view_jobs' %}" class="btn btn-primary">Back</a>
+</div>
+<br>
+
+
+
+
+{% endblock %}
+
+

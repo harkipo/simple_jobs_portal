@@ -1,0 +1,110 @@
+{% extends 'candidate/authenticate_base.html' %} 
+{% block content %}
+
+
+
+
+<div class="card bg-light">
+    <article class="card-body mx-auto" style="max-width: 400px;">
+        <h1 class="card-title mt-3 text-center">Candidate</h1>
+<br>
+
+
+<div id="login_div">
+    <h4 class="card-title mt-3 text-center">Log In</h4>
+    <form action="/candidate/login" method="POST">
+        {% csrf_token %}
+    
+    <div class="form-group input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+         </div>
+        <input name="username" id="username" class="form-control" placeholder="Email address" type="email" required>
+    </div> <!-- form-group// -->
+  
+    <div class="form-group input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+        </div>
+        <input id="login_password" name="login_password" class="form-control" placeholder="Password" type="password" required>
+    </div> <!-- form-group// -->
+                                     
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block"> Log In </button>
+    </div> <!-- form-group// -->      
+    <p class="text-center">Don't Have an account? <a href="javascript:void(0);" id="candidate_signup_btn">Sign Up</a> </p>                                                                 
+</form>
+</div>  <!-- login div// -->
+
+
+<div id="signup_div" style="display: none;">
+    <h4 class="card-title mt-3 text-center">Create Account</h4>
+    <form action="/candidate/register" method="POST">
+        {% csrf_token %}
+    <div class="form-group input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+         </div>
+        <input  class="form-control" id="name" name="name" placeholder="Full name" type="text" required>
+    </div> <!-- form-group// -->
+    <div class="form-group input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+         </div>
+        <input  class="form-control" id="email" name="email" placeholder="Email address" type="email" required>
+    </div> <!-- form-group// -->
+    <div class="form-group input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+         </div>
+        <input  class="form-control" id="current_ctc" name="current_ctc" placeholder="Current CTC" type="number" required>
+    </div> <!-- form-group// -->
+    <div class="form-group input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+         </div>
+        <input  class="form-control" id="expected_ctc" name="expected_ctc" placeholder="Expected CTC" type="number" required>
+    </div> <!-- form-group// -->
+   
+    <div class="form-group input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+        </div>
+        
+        <div class="multiselect">
+            <div class="selectBox" onclick="showCheckboxes()">
+              <select>
+                <option>Check relevent skills</option>
+              </select>
+              <div class="overSelect"></div>
+            </div>
+            <div id="checkboxes">
+                {% for skill in skills %}
+              <label for="skill_{{skill.id}}">
+                <input type="checkbox" name="skill_select" id="skill_{{skill.id}}" value="{{skill.id}}" />{{skill.name|upper}}</label>
+                {% endfor %}
+            </div>
+          </div>
+    </div> <!-- form-group// -->
+  
+    <div class="form-group input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+        </div>
+        <input id="password" name="password" class="form-control" placeholder="Create password" type="password" required>
+    </div> <!-- form-group// -->                                    
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block"> Create Account  </button>
+    </div> <!-- form-group// -->      
+    <p class="text-center">Have an account? <a href="javascript:void(0);" id="candidate_login_btn">Log In</a> </p>                                                                 
+</form>
+</div>
+      
+
+
+    </article>
+    </div> <!-- card.// -->
+
+
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'candidate/base.html' %} 
+{% block content %}
+<br>
+<div class="text-center">
+    <h1>Applied Jobs</h1>
+</div>
+<br>
+<div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Position</th>
+                <th>Company Name</th>
+                <th>CTC</th>
+                <th>Applied at</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for job in jobs %}
+            <tr class="odd gradeX">
+                <td class="center">{{job.job.position}}</td>
+                <td>{{ job.job.company_name }}</td>
+                <td>{{ job.job.ctc }}</td>
+                <td>{{ job.applied_at }}</td>
+                <td>{{ job.status }}</td>
+                
+
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+<br>
+
+
+
+
+
+
+{% endblock %}
+
+
